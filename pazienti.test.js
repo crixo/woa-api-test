@@ -88,9 +88,10 @@ describe("Pazienti endpoint", function() {
     it("should support pagination size", function () {
         
         var resp = chakram.get(config.backendBaseUrl + "/pazienti/page/0/10");
-        return expect(resp).to.have.json('records', function (records) {
+        expect(resp).to.have.json('records', function (records) {
             expect(records).to.have.length(10);
         });
+        return chakram.wait();
     });
 
     it("should return 204 for a not existing paziente", function () {
@@ -102,11 +103,12 @@ describe("Pazienti endpoint", function() {
     it("should be possible to retrieve a paziente by id", function () {
         
         var resp = chakram.get(config.backendBaseUrl + `/pazienti/${createdGlobal.id}`);
-        return expect(resp).to.have.json(function (paziente) {
+        expect(resp).to.have.json(function (paziente) {
             delete paziente.anamnesiRemote;
             delete paziente.consulti;
             expect(paziente).to.deep.equal(createdGlobal);
         });
+        return chakram.wait();
     });    
 
     it("should be possible to create a paziente", function () {

@@ -95,5 +95,7 @@ describe("Consulti endpoint", function() {
             expect(paziente.consulti).to.have.length(1);
             expect(paziente.consulti[0].id).to.equal(consultoGlobal.id);
         });
+
+        return chakram.wait();  
     });     
 });
